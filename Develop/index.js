@@ -1,7 +1,9 @@
 // TODO: Include packages needed for this application
-const inquirer = require('inquirer')
-const fs = require("fs")
-const generateMarkdown = require('./utils/generateMarkdown')
+const inquirer = require('inquirer');
+const fs = require("fs");
+const util = require("util");
+const generateMarkdown = require('./utils/generateMarkdown');
+const writeFileAsync = util.promisify(fs.writeFile);
 
 // TODO: Create an array of questions for user input
 inquirer.prompt([
@@ -61,12 +63,7 @@ inquirer.prompt([
         message:"E-mail",
         name:"email",
     },
-]).then(response =>{
-    fs.writeFile("README1.md",JSON.stringify(response),(error)=>{
-        if(error) {
-            console.log(error);
-        } else {
-            console.log("File created!");
-        }
-    })
-});
+]).then(userResponse=>{
+    console.log(userResponse);
+    console.log(userResponse.title);
+})
